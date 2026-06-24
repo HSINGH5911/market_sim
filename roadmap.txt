@@ -19,15 +19,15 @@ Goal:
 PHASE 2 - ORDER BOOK
 --------------------
 
-[ ] Build OrderBook class
-[ ] Store buy orders (bids)
-[ ] Store sell orders (asks)
-[ ] Sort bids highest -> lowest
-[ ] Sort asks lowest -> highest
-[ ] Implement best_bid()
-[ ] Implement best_ask()
-[ ] Implement add_order()
-[ ] Implement remove_order()
+[x] Build OrderBook class
+[x] Store buy orders (bids)
+[x] Store sell orders (asks)
+[x] Sort bids highest -> lowest
+[x] Sort asks lowest -> highest
+[x] Implement best_bid()
+[x] Implement best_ask()
+[x] Implement add_order()
+[x] Implement remove_order()
 
 Goal:
 - Maintain a valid order book.
@@ -37,13 +37,13 @@ Goal:
 PHASE 3 - MATCHING ENGINE
 -------------------------
 
-[ ] Create MatchingEngine class
-[ ] Detect bid >= ask
-[ ] Execute trades
-[ ] Support partial fills
-[ ] Remove completed orders
-[ ] Generate Trade objects
-[ ] Update stock last price
+[x] Create MatchingEngine class
+[x] Detect bid >= ask
+[x] Execute trades
+[x] Support partial fills
+[x] Remove completed orders
+[x] Generate Trade objects
+[x] Update stock last price
 
 Goal:
 - Market can execute trades.
@@ -61,12 +61,12 @@ Result:
 PHASE 4 - EXCHANGE
 ------------------
 
-[ ] Create Exchange class
-[ ] Accept orders
-[ ] Route orders to OrderBook
-[ ] Run MatchingEngine
-[ ] Store trade history
-[ ] Track market statistics
+[x] Create Exchange class
+[x] Accept orders
+[x] Route orders to OrderBook
+[x] Run MatchingEngine
+[x] Store trade history
+[x] Track market statistics
 
 Goal:
 - Central place managing the market.
