@@ -13,12 +13,14 @@ class Trade:
         seller,
         quantity, 
         price,
-        time
+        time,
+        ticker
     ):
         self.buyer = buyer
         self.seller = seller
         self.quantity = quantity
         self.price = price
         self.time = time
+        self.ticker = ticker
         
 

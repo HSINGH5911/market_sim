@@ -76,13 +76,13 @@ Goal:
 PHASE 5 - PORTFOLIOS
 --------------------
 
-[ ] Create Account class
-[ ] Create Position class
-[ ] Track cash balances
-[ ] Track share ownership
-[ ] Update buyer positions after trades
-[ ] Update seller positions after trades
-[ ] Calculate portfolio value
+[x] Create Account class
+[x] Create Position class
+[x] Track cash balances
+[x] Track share ownership
+[x] Update buyer positions after trades
+[x] Update seller positions after trades
+[x] Calculate portfolio value
 
 Goal:
 - Traders own assets and cash.
