@@ -1,0 +1,271 @@
+MARKET SIMULATOR ROADMAP
+========================
+
+PHASE 1 - CORE MARKET
+---------------------
+
+[x] Create project structure
+[x] Add __init__.py files
+[x] Create Order class
+[x] Create Trade class
+[x] Create Stock class
+[x] Create Trader base class
+
+Goal:
+- Be able to represent orders, trades, stocks, and traders.
+
+------------------------------------------------------------
+
+PHASE 2 - ORDER BOOK
+--------------------
+
+[ ] Build OrderBook class
+[ ] Store buy orders (bids)
+[ ] Store sell orders (asks)
+[ ] Sort bids highest -> lowest
+[ ] Sort asks lowest -> highest
+[ ] Implement best_bid()
+[ ] Implement best_ask()
+[ ] Implement add_order()
+[ ] Implement remove_order()
+
+Goal:
+- Maintain a valid order book.
+
+------------------------------------------------------------
+
+PHASE 3 - MATCHING ENGINE
+-------------------------
+
+[ ] Create MatchingEngine class
+[ ] Detect bid >= ask
+[ ] Execute trades
+[ ] Support partial fills
+[ ] Remove completed orders
+[ ] Generate Trade objects
+[ ] Update stock last price
+
+Goal:
+- Market can execute trades.
+
+Example:
+
+BUY 100 @ 101
+SELL 50 @ 100
+
+Result:
+50 shares traded @ 100
+
+------------------------------------------------------------
+
+PHASE 4 - EXCHANGE
+------------------
+
+[ ] Create Exchange class
+[ ] Accept orders
+[ ] Route orders to OrderBook
+[ ] Run MatchingEngine
+[ ] Store trade history
+[ ] Track market statistics
+
+Goal:
+- Central place managing the market.
+
+------------------------------------------------------------
+
+PHASE 5 - PORTFOLIOS
+--------------------
+
+[ ] Create Account class
+[ ] Create Position class
+[ ] Track cash balances
+[ ] Track share ownership
+[ ] Update buyer positions after trades
+[ ] Update seller positions after trades
+[ ] Calculate portfolio value
+
+Goal:
+- Traders own assets and cash.
+
+------------------------------------------------------------
+
+PHASE 6 - SIMULATION LOOP
+-------------------------
+
+[ ] Create MarketLoop
+[ ] Advance market by ticks
+[ ] Generate trader actions
+[ ] Submit orders
+[ ] Process trades
+[ ] Update prices
+
+Goal:
+- Run a full market simulation.
+
+------------------------------------------------------------
+
+PHASE 7 - RETAIL TRADERS
+------------------------
+
+[ ] Create RetailTrader
+[ ] Random buy decisions
+[ ] Random sell decisions
+[ ] Position sizing logic
+
+Goal:
+- Simulate normal investors.
+
+------------------------------------------------------------
+
+PHASE 8 - MARKET MAKERS
+-----------------------
+
+[ ] Create MarketMaker
+[ ] Post bids below market
+[ ] Post asks above market
+[ ] Update quotes each tick
+[ ] Earn spread profit
+
+Goal:
+- Provide liquidity.
+
+------------------------------------------------------------
+
+PHASE 9 - INSTITUTIONAL TRADERS
+-------------------------------
+
+[ ] Create InstitutionalTrader
+[ ] Place large orders
+[ ] Simulate market impact
+[ ] Simulate accumulation/distribution
+
+Goal:
+- Create realistic large price moves.
+
+------------------------------------------------------------
+
+PHASE 10 - VOLATILITY
+---------------------
+
+[ ] Create volatility model
+[ ] Add randomness to trader behavior
+[ ] Create low-volatility mode
+[ ] Create high-volatility mode
+
+Goal:
+- Produce realistic price movement.
+
+------------------------------------------------------------
+
+PHASE 11 - NEWS EVENTS
+----------------------
+
+[ ] Create NewsEvent class
+[ ] Generate positive news
+[ ] Generate negative news
+[ ] Generate neutral news
+[ ] Create sentiment score
+[ ] Influence trader decisions
+
+Goal:
+- Market reacts to information.
+
+------------------------------------------------------------
+
+PHASE 12 - MULTIPLE STOCKS
+--------------------------
+
+[ ] Support multiple tickers
+[ ] Separate order books
+[ ] Separate trade histories
+[ ] Separate market statistics
+
+Examples:
+
+AAPL
+MSFT
+NVDA
+GOOG
+TSLA
+
+Goal:
+- Simulate an entire exchange.
+
+------------------------------------------------------------
+
+PHASE 13 - DATABASE
+-------------------
+
+[ ] Install PostgreSQL
+[ ] Create orders table
+[ ] Create trades table
+[ ] Create traders table
+[ ] Create positions table
+[ ] Save simulation history
+
+Goal:
+- Persist market data.
+
+------------------------------------------------------------
+
+PHASE 14 - FASTAPI
+------------------
+
+[ ] Setup FastAPI
+[ ] GET /stocks
+[ ] GET /orderbook
+[ ] GET /trades
+[ ] POST /order
+[ ] GET /portfolio
+
+Goal:
+- Expose market data through an API.
+
+------------------------------------------------------------
+
+PHASE 15 - FRONTEND
+-------------------
+
+[ ] Setup React frontend
+[ ] Live stock prices
+[ ] Order book view
+[ ] Trade history view
+[ ] Portfolio dashboard
+[ ] Market statistics dashboard
+
+Goal:
+- Interactive trading interface.
+
+------------------------------------------------------------
+
+STRETCH GOALS
+-------------
+
+[ ] Momentum trading bot
+[ ] Mean reversion bot
+[ ] RL trading agent
+[ ] Historical backtesting
+[ ] Market crash events
+[ ] Earnings seasons
+[ ] Stock splits
+[ ] Dividends
+[ ] Short selling
+[ ] Options market
+[ ] High-frequency trading simulation
+
+============================================================
+
+MVP COMPLETION CHECKLIST
+
+[ ] Order
+[ ] Trade
+[ ] Trader
+[ ] Stock
+[ ] OrderBook
+[ ] MatchingEngine
+[ ] Exchange
+[ ] Portfolio
+[ ] MarketLoop
+
+If all boxes above are completed,
+the stock exchange simulation is functional.
