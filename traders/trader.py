@@ -5,6 +5,8 @@ Defines common functionality such as cash balances,
 share holdings, order placement, and portfolio updates.
 """
 
+import random
+
 class Trader:
 
     def __init__(
@@ -67,5 +69,5 @@ class Trader:
         
         return total
 
-    def generate_order(self):
-        pass
+    def generate_order(self, stock):
+       pass

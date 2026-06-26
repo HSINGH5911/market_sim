@@ -92,12 +92,12 @@ Goal:
 PHASE 6 - SIMULATION LOOP
 -------------------------
 
-[ ] Create MarketLoop
-[ ] Advance market by ticks
-[ ] Generate trader actions
-[ ] Submit orders
-[ ] Process trades
-[ ] Update prices
+[x] Create MarketLoop
+[x] Advance market by ticks
+[x] Generate trader actions
+[x] Submit orders
+[x] Process trades
+[x] Update prices
 
 Goal:
 - Run a full market simulation.
@@ -107,10 +107,10 @@ Goal:
 PHASE 7 - RETAIL TRADERS
 ------------------------
 
-[ ] Create RetailTrader
-[ ] Random buy decisions
-[ ] Random sell decisions
-[ ] Position sizing logic
+[x] Create RetailTrader
+[x] Random buy decisions
+[x] Random sell decisions
+[x] Position sizing logic
 
 Goal:
 - Simulate normal investors.
