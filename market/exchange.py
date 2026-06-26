@@ -15,6 +15,7 @@ class Exchange:
         self.stock = stock
         self.order_book = order_book
         self.matching_engine = matching_engine
+        self.trade_history = []
     
     def submit_order(self, order):
         self.order_book.add_order(order)

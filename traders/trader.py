@@ -59,8 +59,6 @@ class Trader:
             else:
                 self.positions[ticker_name] -= ticker_quantity
 
-
-
     def portfolio_value(self, prices):
         total = self.cash
 
@@ -68,3 +66,6 @@ class Trader:
             total += shares * prices[ticker]
         
         return total
+
+    def generate_order(self):
+        pass
