@@ -49,7 +49,7 @@ class MarketMaker(Trader):
             self.quote_size,
             ask_price
         )
-        
+    
         return bid_order, ask_order
 
     def update_quotes(self, stock):

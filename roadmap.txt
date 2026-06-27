@@ -120,11 +120,11 @@ Goal:
 PHASE 8 - MARKET MAKERS
 -----------------------
 
-[ ] Create MarketMaker
-[ ] Post bids below market
-[ ] Post asks above market
-[ ] Update quotes each tick
-[ ] Earn spread profit
+[x] Create MarketMaker
+[x] Post bids below market
+[x] Post asks above market
+[x] Update quotes each tick
+[x] Earn spread profit
 
 Goal:
 - Provide liquidity.

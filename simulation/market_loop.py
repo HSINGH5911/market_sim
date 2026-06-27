@@ -31,22 +31,22 @@ class MarketLoop:
 
         self.generate_trader_actions()
 
-        self.process_market()
+        self.exchange.process_orders()
 
-    def generate_trader_actions(self, stock):
-
+    def generate_trader_actions(self):
+        
         for trader in self.traders:
+            stock = self.exchange.stock
+
             if isinstance(trader, MarketMaker):
                 orders = trader.update_quotes(stock)
 
                 for order in orders:
                     self.exchange.submit_order(order)
+            
             else:
                 order = trader.generate_order(stock)
 
                 if order:
                     self.exchange.submit_order(order)
 
-
-            if order is not None:
-                self.exchange.process_orders()
