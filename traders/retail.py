@@ -9,6 +9,7 @@ import random
 
 from traders.trader import Trader
 from matching.order import Order
+from simulation.volatility import VolatilityModel
 
 class ReatilTrader(Trader):
 
@@ -71,7 +72,7 @@ class ReatilTrader(Trader):
             shares_owned
         )
 
-        price = stock.last_traded_price + random.randint(-2, 2)
+        price = stock.last_traded_price + VolatilityModel.get_price_offset()
 
         return Order(
             self.trader_id,

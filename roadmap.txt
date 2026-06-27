@@ -147,10 +147,10 @@ Goal:
 PHASE 10 - VOLATILITY
 ---------------------
 
-[ ] Create volatility model
-[ ] Add randomness to trader behavior
-[ ] Create low-volatility mode
-[ ] Create high-volatility mode
+[x] Create volatility model
+[x] Add randomness to trader behavior
+[x] Create low-volatility mode
+[x] Create high-volatility mode
 
 Goal:
 - Produce realistic price movement.

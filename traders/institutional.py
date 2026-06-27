@@ -9,6 +9,7 @@ import random
 
 from traders.trader import Trader
 from matching.order import Order
+from simulation.volatility import VolatilityModel
 
 class InstitutionalTrader(Trader):
 
@@ -31,7 +32,7 @@ class InstitutionalTrader(Trader):
         )
 
     def position_size(self):
-        return random.randint(500,5000)
+        return int(random.randint(500, 5000) + VolatilityModel.get_order_size_multiplier())
 
     def generate_order(self, stock):
         if self.mode == "ACCUMULATE":

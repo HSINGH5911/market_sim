@@ -69,5 +69,5 @@ class Trader:
         
         return total
 
-    def generate_order(self, stock):
+    def generate_order(self, stock, volatility_model):
        pass

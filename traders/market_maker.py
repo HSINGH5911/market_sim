@@ -7,6 +7,7 @@ the current market price to profit from the spread.
 
 from traders.trader import Trader
 from matching.order import Order
+from simulation.volatility import VolatilityModel
 
 class MarketMaker(Trader):
     
@@ -31,6 +32,7 @@ class MarketMaker(Trader):
 
         market_price = stock.last_traded_price
 
+        spread_adjustment = abs(VolatilityModel.get_price_offset())
         bid_price = market_price - (self.spread / 2)
         ask_price = market_price + (self.spread / 2)
 

@@ -12,7 +12,7 @@ class Stock:
         symbol,
         last_traded_price,
         volume=0,
-        volatility=1.0,
+        volatility = "LOW",
     ):
         self.symbol = symbol
         self.last_traded_price = last_traded_price
