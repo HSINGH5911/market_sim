@@ -134,10 +134,10 @@ Goal:
 PHASE 9 - INSTITUTIONAL TRADERS
 -------------------------------
 
-[ ] Create InstitutionalTrader
-[ ] Place large orders
-[ ] Simulate market impact
-[ ] Simulate accumulation/distribution
+[x] Create InstitutionalTrader
+[x] Place large orders
+[x] Simulate market impact
+[x] Simulate accumulation/distribution
 
 Goal:
 - Create realistic large price moves.

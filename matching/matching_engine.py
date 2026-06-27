@@ -5,16 +5,17 @@ Executes trades whenever a bid price is greater than or equal
 to an ask price and updates the order book accordingly.
 """
 
-from trade import Trade
-from datetime import time
+from matching.trade import Trade
+import time
 
 class Matching_Engine:
 
-    def __init__(self, order_book):
+    def __init__(self, order_book, stock):
         self.order_book = order_book
+        self.stock = stock
     
     def is_bid_greater_than_ask(self, bids, asks):
-        return bids[0].price > asks[0].price
+        return bids[0].price >= asks[0].price
     
     def execute_trade(self):
         best_bid = self.order_book.bids[0]
@@ -30,10 +31,19 @@ class Matching_Engine:
         trade = Trade(
             buyer=best_bid.trader_id,
             seller=best_ask.trader_id,
+            ticker=best_bid.ticker,
             quantity=quantity,
             price=trade_price,
             time=time.time()
         )
+
+        self.stock.last_traded_price = trade_price
+        self.stock.volume += quantity
+
+        if quantity >= 1000:
+            impact = quantity / 10000
+            self.stock.last_traded_price += impact
+        
 
         best_bid.quantity -= quantity
         best_ask.quantity -= quantity
