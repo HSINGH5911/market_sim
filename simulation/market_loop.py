@@ -4,6 +4,7 @@ Controls the simulation timeline.
 Advances the market one step at a time, processes trader actions,
 and updates prices and portfolios.
 """
+from traders.market_maker import MarketMaker
 
 class MarketLoop:
     def __init__(
@@ -32,10 +33,20 @@ class MarketLoop:
 
         self.process_market()
 
-    def generate_trader_actions(self):
+    def generate_trader_actions(self, stock):
 
         for trader in self.traders:
-            order = trader.generate_order()
+            if isinstance(trader, MarketMaker):
+                orders = trader.update_quotes(stock)
+
+                for order in orders:
+                    self.exchange.submit_order(order)
+            else:
+                order = trader.generate_order(stock)
+
+                if order:
+                    self.exchange.submit_order(order)
+
 
             if order is not None:
                 self.exchange.process_orders()
