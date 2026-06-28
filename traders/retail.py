@@ -10,6 +10,7 @@ import random
 from traders.trader import Trader
 from matching.order import Order
 from simulation.volatility import VolatilityModel
+from simulation.news_events import News
 
 class ReatilTrader(Trader):
 
@@ -28,13 +29,16 @@ class ReatilTrader(Trader):
 
         self.ticker = ticker
     
-    def generate_order(self):
+    def generate_order(self, stock, news=None):
         action = random.random()
 
+        if news:
+            action += news.sentiment * 0.2
+
         if action < 0.4:
-            return self.generate_buy_order()
-        elif action < 0.8:
-            return self.generate_sell_order()
+            return self.generate_buy_order(stock)
+        elif action > 0.6:
+            return self.generate_sell_order(stock)
         
         return None
 

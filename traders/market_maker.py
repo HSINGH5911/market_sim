@@ -8,6 +8,7 @@ the current market price to profit from the spread.
 from traders.trader import Trader
 from matching.order import Order
 from simulation.volatility import VolatilityModel
+from simulation.news_events import News
 
 class MarketMaker(Trader):
     
@@ -28,13 +29,16 @@ class MarketMaker(Trader):
         self.spread = spread
         self.quote_size = quote_size
 
-    def generate_quotes(self, stock):
+    def generate_quotes(self, stock, news=None):
 
         market_price = stock.last_traded_price
 
-        spread_adjustment = abs(VolatilityModel.get_price_offset())
-        bid_price = market_price - (self.spread / 2)
-        ask_price = market_price + (self.spread / 2)
+        if news:
+            self.spread = 2 + abs(news.sentiment) * 5
+        
+        spread_adjustment = abs(VolatilityModel.get_price_offset()) + self.spread
+        bid_price = market_price - (spread_adjustment)
+        ask_price = market_price + (spread_adjustment)
 
         bid_order = Order(
             self.trader_id,

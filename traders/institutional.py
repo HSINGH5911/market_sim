@@ -10,6 +10,7 @@ import random
 from traders.trader import Trader
 from matching.order import Order
 from simulation.volatility import VolatilityModel
+from simulation.news_events import News
 
 class InstitutionalTrader(Trader):
 
@@ -34,7 +35,13 @@ class InstitutionalTrader(Trader):
     def position_size(self):
         return int(random.randint(500, 5000) + VolatilityModel.get_order_size_multiplier())
 
-    def generate_order(self, stock):
+    def generate_order(self, stock, news=None):
+        if news:
+            if news.sentiment > 0.5:
+                self.mode = "ACCUMULATE"
+            elif news.sentiment < -0.5:
+                self.mode = "DISTRIBUTE"
+        
         if self.mode == "ACCUMULATE":
             return self.generate_buy_order(stock)
         
