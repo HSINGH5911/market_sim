@@ -7,6 +7,7 @@ and maintains market-wide state.
 
 from matching.order_book import OrderBook
 from matching.matching_engine import Matching_Engine
+from database.repository import save_trade
 
 class Exchange:
     def __init__(self):
@@ -43,6 +44,7 @@ class Exchange:
             ):
                 trade = engine.execute_trade()
                 self.trade_histories[ticker].append(trade)
+                save_trade(trade)
 
     def get_last_price(self, stock):
         
