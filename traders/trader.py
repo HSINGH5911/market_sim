@@ -7,6 +7,8 @@ share holdings, order placement, and portfolio updates.
 
 import random
 
+from market.exchange import Exchange
+
 class Trader:
 
     def __init__(
@@ -69,5 +71,5 @@ class Trader:
         
         return total
 
-    def generate_order(self, stock, volatility_model):
+    def generate_order(self, stocks, volatility_model):
        pass

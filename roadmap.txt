@@ -160,12 +160,12 @@ Goal:
 PHASE 11 - NEWS EVENTS
 ----------------------
 
-[ ] Create NewsEvent class
-[ ] Generate positive news
-[ ] Generate negative news
-[ ] Generate neutral news
-[ ] Create sentiment score
-[ ] Influence trader decisions
+[x] Create NewsEvent class
+[x] Generate positive news
+[x] Generate negative news
+[x] Generate neutral news
+[x] Create sentiment score
+[x] Influence trader decisions
 
 Goal:
 - Market reacts to information.
@@ -175,10 +175,10 @@ Goal:
 PHASE 12 - MULTIPLE STOCKS
 --------------------------
 
-[ ] Support multiple tickers
-[ ] Separate order books
-[ ] Separate trade histories
-[ ] Separate market statistics
+[x] Support multiple tickers
+[x] Separate order books
+[x] Separate trade histories
+[x] Separate market statistics
 
 Examples:
 

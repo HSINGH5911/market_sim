@@ -56,16 +56,16 @@ class MarketLoop:
     def generate_trader_actions(self):
         
         for trader in self.traders:
-            stock = self.exchange.stock
+            stocks = self.exchange.stocks
 
             if isinstance(trader, MarketMaker):
-                orders = trader.update_quotes(stock)
+                orders = trader.update_quotes(stocks)
 
                 for order in orders:
                     self.exchange.submit_order(order)
             
             else:
-                order = trader.generate_order(stock, self.volatility_model)
+                order = trader.generate_order(stocks, self.volatility_model)
 
                 if order:
                     self.exchange.submit_order(order)
