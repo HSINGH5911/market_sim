@@ -196,12 +196,12 @@ Goal:
 PHASE 13 - DATABASE
 -------------------
 
-[ ] Install PostgreSQL
-[ ] Create orders table
-[ ] Create trades table
-[ ] Create traders table
-[ ] Create positions table
-[ ] Save simulation history
+[x] Install PostgreSQL
+[x] Create orders table
+[x] Create trades table
+[x] Create traders table
+[x] Create positions table
+[x] Save simulation history
 
 Goal:
 - Persist market data.
@@ -211,12 +211,12 @@ Goal:
 PHASE 14 - FASTAPI
 ------------------
 
-[ ] Setup FastAPI
-[ ] GET /stocks
-[ ] GET /orderbook
-[ ] GET /trades
-[ ] POST /order
-[ ] GET /portfolio
+[x] Setup FastAPI
+[x] GET /stocks
+[x] GET /orderbook
+[x] GET /trades
+[x] POST /order
+[x] GET /portfolio
 
 Goal:
 - Expose market data through an API.

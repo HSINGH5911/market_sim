@@ -15,6 +15,7 @@ class Exchange:
         self.order_books = {}
         self.matching_engines = {}
         self.trade_histories = {}
+        self.traders = {}
     
     def add_stock(self, stock):
         symbol = stock.symbol
@@ -59,4 +60,7 @@ class Exchange:
     def get_trade_history(self, stock):
         return self.trade_histories[stock.symbol]
     
-    
+    def register_traders(self, trader):
+        self.traders[
+            trader.trader_id
+        ] = trader
