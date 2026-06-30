@@ -24,7 +24,7 @@ class MarketLoop:
         self.traders = traders
         self.volatility_model = volatility_model
         self.max_ticks = max_ticks
-        self.news = news, 
+        self.news = news
         self.current_tick = 0
 
     
@@ -45,7 +45,7 @@ class MarketLoop:
 
         self.generate_news()
 
-        if random.random < 0.01:
+        if random.random() < 0.01:
 
             if self.volatility_model.mode == "LOW":
                 self.volatility_model.mode = "HIGH"
@@ -59,24 +59,29 @@ class MarketLoop:
             stocks = self.exchange.stocks
 
             if isinstance(trader, MarketMaker):
-                orders = trader.update_quotes(stocks)
+                for stock in stocks.values():
+                    orders = trader.update_quotes(stock, self.news)
 
-                for order in orders:
-                    self.exchange.submit_order(order)
+                    for order in orders:
+                        self.exchange.submit_order(order)
             
             else:
-                order = trader.generate_order(stocks, self.volatility_model)
+                ticker = getattr(trader, "ticker", None)
+                if ticker and ticker in stocks:
+                    stock = stocks[ticker]
+                    order = trader.generate_order(stock, self.news)
 
-                if order:
-                    self.exchange.submit_order(order)
+                    if order:
+                        self.exchange.submit_order(order)
 
     def generate_news(self):
         
-        if random.random < 0.05:
+        if random.random() < 0.05:
             self.news = News.generate_news()
             
-            self.exchange.stock.last_traded_price += (
-                self.news.sentiment * 2
-             )
+            for stock in self.exchange.stocks.values():
+                stock.last_traded_price += (
+                    self.news.sentiment * 2
+                )
 
-            print(self.news.headline)
+            print(f"Tick {self.current_tick} NEWS: {self.news.headline}")

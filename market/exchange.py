@@ -46,6 +46,19 @@ class Exchange:
                 trade = engine.execute_trade()
                 self.trade_histories[ticker].append(trade)
                 save_trade(trade)
+                print(f"TRADE: {trade.quantity} shares of {trade.ticker} traded at ${trade.price:.2f} (Buyer: {trade.buyer}, Seller: {trade.seller})")
+
+                # Update positions of buyer and seller
+                if trade.buyer in self.traders:
+                    try:
+                        self.traders[trade.buyer].update_position(trade)
+                    except ValueError as e:
+                        print(f"Error updating buyer {trade.buyer} position: {e}")
+                if trade.seller in self.traders:
+                    try:
+                        self.traders[trade.seller].update_position(trade)
+                    except ValueError as e:
+                        print(f"Error updating seller {trade.seller} position: {e}")
 
     def get_last_price(self, stock):
         

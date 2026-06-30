@@ -63,7 +63,7 @@ class InstitutionalTrader(Trader):
             price
         )
     
-    def generate_sell_orders(self, stock):
+    def generate_sell_order(self, stock):
         shares_owned = self.positions.get(stock.symbol, 0)
 
         if shares_owned <= 0:

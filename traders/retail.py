@@ -12,7 +12,7 @@ from matching.order import Order
 from simulation.volatility import VolatilityModel
 from simulation.news_events import News
 
-class ReatilTrader(Trader):
+class RetailTrader(Trader):
 
     def __init__(
         self, 

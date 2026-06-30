@@ -13,5 +13,5 @@ class OrderRequest(BaseModel):
     trader_id: int
     ticker: str
     side: str
-    quantity: str
+    quantity: int
     price: float

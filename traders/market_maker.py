@@ -58,11 +58,11 @@ class MarketMaker(Trader):
     
         return bid_order, ask_order
 
-    def update_quotes(self, stock):
+    def update_quotes(self, stock, news=None):
 
         self.open_orders.clear()
 
-        bid_order, ask_order = self.generate_quotes(stock)
+        bid_order, ask_order = self.generate_quotes(stock, news)
 
         self.open_orders.append(bid_order)
         self.open_orders.append(ask_order)

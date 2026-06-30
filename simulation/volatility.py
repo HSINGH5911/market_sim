@@ -8,24 +8,32 @@ to create realistic price movement.
 import random
 
 class VolatilityModel:
-
+    _mode = "LOW"
 
     def __init__(
         self,
         mode = "LOW"
     ):
-        self.mode = mode
+        VolatilityModel._mode = mode
     
-    def get_price_offset(self):
+    @property
+    def mode(self):
+        return VolatilityModel._mode
 
-        if self.mode == "LOW":
+    @mode.setter
+    def mode(self, value):
+        VolatilityModel._mode = value
+    
+    @classmethod
+    def get_price_offset(cls):
+        if cls._mode == "LOW":
             return random.randint(-1, 1)
         
         return random.randint(-10, 10)
 
-    def get_order_size_multiplier(self):
-        
-        if self.mode == "LOW":
+    @classmethod
+    def get_order_size_multiplier(cls):
+        if cls._mode == "LOW":
             return random.uniform(0.8, 1.2)
 
         return random.uniform(0.5, 2.0)

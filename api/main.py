@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from api.schemas import OrderRequest
 from market.exchange import Exchange
 from matching.order import Order
@@ -11,15 +11,14 @@ app = FastAPI(
 
 @app.get("/stocks")
 def get_stocks():
-    return (
+    return [
         {
             "ticker": stock.symbol,
             "price": stock.last_traded_price,
             "volume": stock.volume
         }
-
         for stock in exchange.stocks.values()
-    )
+    ]
 
 @app.get("/orderbook/{ticker}")
 def get_orderbook(ticker: str):
@@ -63,9 +62,9 @@ def submit_order(request: OrderRequest):
 
 @app.get("/portfolio/{trader_id}")
 def get_portfolio(trader_id: int):
-    trader = exchange.traders[
-        trader_id
-    ]
+    if trader_id not in exchange.traders:
+        raise HTTPException(status_code=404, detail="Trader not found")
+    trader = exchange.traders[trader_id]
  
     return {
         "cash": trader.cash,

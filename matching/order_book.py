@@ -15,8 +15,10 @@ class OrderBook:
     def add_order(self, order):
         if order.side == "BUY":
             self.bids.append(order)
+            self.bids.sort(key=lambda o: o.price, reverse=True)
         else:
             self.asks.append(order)
+            self.asks.sort(key=lambda o: o.price)
 
     def remove_order(self, order):
         if order.side == "BUY":
