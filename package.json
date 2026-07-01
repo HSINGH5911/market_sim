@@ -1,0 +1,12 @@
+{
+  "name": "market-sim",
+  "private": true,
+  "scripts": {
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "python app.py",
+    "dev": "npm --prefix frontend run dev"
+  },
+  "dependencies": {
+    "vite": "^8.1.2"
+  }
+}

@@ -226,12 +226,12 @@ Goal:
 PHASE 15 - FRONTEND
 -------------------
 
-[ ] Setup React frontend
-[ ] Live stock prices
-[ ] Order book view
-[ ] Trade history view
-[ ] Portfolio dashboard
-[ ] Market statistics dashboard
+[x] Setup React frontend
+[x] Live stock prices
+[x] Order book view
+[x] Trade history view
+[x] Portfolio dashboard
+[x] Market statistics dashboard
 
 Goal:
 - Interactive trading interface.
