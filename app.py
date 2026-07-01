@@ -6,10 +6,12 @@ News Events, and Database. Runs the market simulation in a background thread
 while exposing the FastAPI endpoints to serve live market data.
 """
 
+import yfinance as yf
 import threading
 import time
 import random
 import uvicorn
+import pandas as pd
 
 # Import API components (sharing the same global exchange instance)
 from api.main import app, exchange
@@ -28,7 +30,7 @@ from traders.institutional import InstitutionalTrader
 def setup_market():
     print("Initializing Market Simulator components...")
     
-    # 1. Define Stocks
+    # Define Stocks
     stocks_config = {
         "AAPL": 150.0,
         "MSFT": 250.0,
@@ -37,17 +39,47 @@ def setup_market():
         "NVDA": 220.0
     }
     
+    # Fetch real-time/latest stock prices from Yahoo Finance
+    print("Fetching initial stock prices from Yahoo Finance...")
+    try:
+        symbols = list(stocks_config.keys())
+        data = yf.download(symbols, period="1d", progress=False)
+
+        if not data.empty and "Close" in data.columns:
+            close_data = data["Close"]
+
+            if isinstance(close_data, pd.Series):
+                prices = close_data.dropna()
+                
+                if not prices.empty:
+                    symbol = symbols[0]
+                    stocks_config[symbol] = float(prices.iloc[-1])
+                    print(f"Fetched yfinance price for {symbol}: ${stocks_config[symbol]:.2f}")
+            
+            elif isinstance(close_data, pd.DataFrame):
+                for symbol in symbols:
+                    if symbol in close_data.columns:
+                        prices = close_data[symbol].dropna()
+                        
+                        if not prices.empty:
+                            stocks_config[symbol] = float(prices.iloc[-1])
+                            print(f"Fetched yfinance price for {symbol}: ${stocks_config[symbol]:.2f}")
+    
+    except Exception as e:
+        print(f"Warning: Failed to fetch prices from yfinance ({e}). Using hardcoded default prices.")
+    
     stocks = []
+    
     for symbol, price in stocks_config.items():
         stock = Stock(symbol=symbol, last_traded_price=price)
         exchange.add_stock(stock)
         stocks.append(stock)
         print(f"Added stock: {symbol} at initial price ${price:.2f}")
 
-    # 2. Initialize Traders List
+    # Initialize Traders List
     traders = []
 
-    # 3. Create and Register Market Maker
+    # Create and Register Market Maker
     mm = MarketMaker(
         trader_id=1,
         name="LiquidityProvider_MM",
@@ -55,6 +87,7 @@ def setup_market():
         quote_size=200,
         cash=10000000.0
     )
+    
     # Seed Market Maker with inventory for each stock to facilitate trading
     for stock in stocks:
         mm.positions[stock.symbol] = 100000
@@ -63,7 +96,7 @@ def setup_market():
     traders.append(mm)
     print(f"Registered Market Maker: {mm.name} (Cash: ${mm.cash:,.2f})")
 
-    # 4. Create and Register Retail Traders (2 per stock)
+    # Create and Register Retail Traders (2 per stock)
     retail_id = 10
     for stock in stocks:
         for i in range(1, 3):
@@ -73,15 +106,18 @@ def setup_market():
                 ticker=stock.symbol,
                 cash=100000.0
             )
+            
             # Seed retail traders with some shares to enable selling
             rt.positions[stock.symbol] = 1000
             exchange.register_traders(rt)
             traders.append(rt)
             retail_id += 1
+            
             print(f"Registered Retail Trader: {rt.name} (Cash: ${rt.cash:,.2f})")
 
-    # 5. Create and Register Institutional Traders (1 per stock)
+    # Create and Register Institutional Traders (1 per stock)
     inst_id = 20
+    
     for stock in stocks:
         it = InstitutionalTrader(
             trader_id=inst_id,
@@ -89,6 +125,7 @@ def setup_market():
             ticker=stock.symbol,
             cash=5000000.0
         )
+        
         # Seed institutional traders with substantial shares
         it.positions[stock.symbol] = 50000
         exchange.register_traders(it)
@@ -96,11 +133,11 @@ def setup_market():
         inst_id += 1
         print(f"Registered Institutional Trader: {it.name} (Cash: ${it.cash:,.2f})")
 
-    # 6. Setup Volatility and News models
+    # Setup Volatility and News models
     volatility_model = VolatilityModel(mode="LOW")
     news_generator = News(headline="Market opens normally.", sentiment=0.0)
 
-    # 7. Initialize the Simulation Loop
+    # Initialize the Simulation Loop
     market_loop = MarketLoop(
         exchange=exchange,
         traders=traders,
@@ -119,6 +156,7 @@ def run_simulation(market_loop):
         try:
             market_loop.advance_tick()
             time.sleep(tick_delay)
+        
         except Exception as e:
             print(f"Error during simulation tick: {e}")
             time.sleep(2.0)
@@ -134,6 +172,7 @@ def main():
         print(f"Database connection verified. Tables present: {tables}")
         cur.close()
         conn.close()
+    
     except Exception as e:
         print(f"Warning: Database setup verification failed: {e}")
         print("Please ensure PostgreSQL is running and database 'exchange_sim' exists.")
